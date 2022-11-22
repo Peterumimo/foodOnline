@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from vendor.models import Vendor
 from .utils import detectUser,send_verification_email
 from vendor.forms import VendorForm
 from . models import User, UserProfile
@@ -57,7 +58,7 @@ def registerUser(request):
             mail_subject = 'Please activate your account'
             email_template = 'accounts/emails/account_verification_email.html'
 
-            send_verification_email(request, user,mail_subject,email_template, form.changed_data.get('email'))
+            send_verification_email(request, user,mail_subject, email_template)
             messages.success(request, 'Your account has been register successfully')
             return redirect('registerUser')
         else:
@@ -188,6 +189,7 @@ def forgot_password(request):
             #send reset password email
             mail_subject = 'Reset Your Password'
             email_template = 'accounts/emails/reset_password_email.html'
+            
             send_verification_email(request, user, mail_subject, email_template)
 
             messages.success(request, 'Password reset link has been sent to your email address.')
@@ -231,4 +233,5 @@ def reset_password(request):
         else:
             messages.error(request, 'Password does not match!')
             return redirect('reset_password')
+            
     return render(request, 'accounts/reset_password.html')

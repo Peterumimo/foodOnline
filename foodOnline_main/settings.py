@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'account.context_processors.get_vendor',
             ],
         },
     },
@@ -149,13 +150,12 @@ MESSAGE_TAGS = {
 # AUTHENTICATION_BACKENDS = ['user.backends.EmailBackend']
 
 # Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = 'FoodOnline Marketplace <foodonline.django2022@gmail.com>'
 
-PASSWORD_RESET_TIMEOUT = 14400
+# PASSWORD_RESET_TIMEOUT = 14400
